@@ -2,9 +2,15 @@ import styles from './page.module.css';
 
 import NavBar from '@/components/navbar/navbar';
 import Banner from '@/components/banner/banner';
-import Card from '@/components/card/card';
+import SectionCards from '@/components/section-cards/section-cards';
 
 export default function Home() {
+  const videos: string[] = [
+    '/static/clifford.webp',
+    '/static/clifford.webp',
+    '/static/clifford.webp',
+  ];
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -16,9 +22,10 @@ export default function Home() {
           imgUrl={'/static/clifford.webp'}
         />
 
-        <Card imgUrl={'/static/clifford.webp'} size={'large'} />
-        <Card imgUrl={'/static/clifford.webp'} size={'medium'} />
-        <Card imgUrl={'/static/clifford.webp'} size={'small'} />
+        <div className={styles.sectionWrapper}>
+          <SectionCards title='Disney' videos={videos} size='large' />
+          <SectionCards title='Disney' videos={videos} size='medium' />
+        </div>
       </main>
     </div>
   );
