@@ -3,13 +3,10 @@ import styles from './page.module.css';
 import NavBar from '@/components/navbar/navbar';
 import Banner from '@/components/banner/banner';
 import SectionCards from '@/components/section-cards/section-cards';
+import { getVideos } from '@/lib/videos';
 
-export default function Home() {
-  const videos: string[] = [
-    '/static/clifford.webp',
-    '/static/clifford.webp',
-    '/static/clifford.webp',
-  ];
+export default async function Home() {
+  const disneyVideos = await getVideos();
 
   return (
     <div className={styles.container}>
@@ -23,8 +20,8 @@ export default function Home() {
         />
 
         <div className={styles.sectionWrapper}>
-          <SectionCards title='Disney' videos={videos} size='large' />
-          <SectionCards title='Disney' videos={videos} size='medium' />
+          <SectionCards title='Disney' videos={disneyVideos} size='large' />
+          <SectionCards title='Disney' videos={disneyVideos} size='medium' />
         </div>
       </main>
     </div>

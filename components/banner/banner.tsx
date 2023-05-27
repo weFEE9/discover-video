@@ -14,6 +14,7 @@ const Banner = ({ title, subTitle, imgUrl }: props) => {
   const handleOnPlay = () => {
     console.log('play');
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.leftWrapper}>
