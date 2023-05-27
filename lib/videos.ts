@@ -4,12 +4,11 @@ export type Video = {
   imgUrl: string;
 };
 
-export const getVideos = async (): Promise<Video[]> => {
+export const getVideos = async (searchQuery: string): Promise<Video[]> => {
   const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
 
-  // https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=disney%20trailer&type=video&key=[YOUR_API_KEY]
   const response = await fetch(
-    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=disney%20trailer&type=video&key=${YOUTUBE_API_KEY}`
+    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchQuery}&type=video&key=${YOUTUBE_API_KEY}`
   );
 
   const data: YoutubeAPIResponse = await response.json();

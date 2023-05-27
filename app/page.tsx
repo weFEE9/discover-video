@@ -6,7 +6,11 @@ import SectionCards from '@/components/section-cards/section-cards';
 import { getVideos } from '@/lib/videos';
 
 export default async function Home() {
-  const disneyVideos = await getVideos();
+  const disneyVideos = await getVideos('disney trailer');
+
+  const travelVideos = await getVideos('travel');
+
+  const productivityVideos = await getVideos('productivity');
 
   return (
     <div className={styles.container}>
@@ -21,7 +25,13 @@ export default async function Home() {
 
         <div className={styles.sectionWrapper}>
           <SectionCards title='Disney' videos={disneyVideos} size='large' />
-          <SectionCards title='Disney' videos={disneyVideos} size='medium' />
+          <SectionCards title='Travel' videos={travelVideos} size='small' />
+          <SectionCards
+            title='Productivity'
+            videos={productivityVideos}
+            size='medium'
+          />
+          <SectionCards title='Popular' videos={disneyVideos} size='small' />
         </div>
       </main>
     </div>
