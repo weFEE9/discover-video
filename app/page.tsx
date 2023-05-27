@@ -3,14 +3,16 @@ import styles from './page.module.css';
 import NavBar from '@/components/navbar/navbar';
 import Banner from '@/components/banner/banner';
 import SectionCards from '@/components/section-cards/section-cards';
-import { getVideos } from '@/lib/videos';
+import { getYoutubeVideos } from '@/lib/videos';
 
 export default async function Home() {
-  const disneyVideos = await getVideos('disney trailer');
+  const disneyVideos = await getYoutubeVideos('common', 'disney trailer');
 
-  const travelVideos = await getVideos('travel');
+  const travelVideos = await getYoutubeVideos('common', 'travel');
 
-  const productivityVideos = await getVideos('productivity');
+  const productivityVideos = await getYoutubeVideos('common', 'productivity');
+
+  const popularVideos = await getYoutubeVideos('popular');
 
   return (
     <div className={styles.container}>
@@ -31,7 +33,7 @@ export default async function Home() {
             videos={productivityVideos}
             size='medium'
           />
-          <SectionCards title='Popular' videos={disneyVideos} size='small' />
+          <SectionCards title='Popular' videos={popularVideos} size='small' />
         </div>
       </main>
     </div>
