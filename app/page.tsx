@@ -3,13 +3,16 @@ import styles from './page.module.css';
 import NavBar from '@/components/navbar/navbar';
 import Banner from '@/components/banner/banner';
 import SectionCards from '@/components/section-cards/section-cards';
+import { getYoutubeVideos } from '@/lib/videos';
 
-export default function Home() {
-  const videos: string[] = [
-    '/static/clifford.webp',
-    '/static/clifford.webp',
-    '/static/clifford.webp',
-  ];
+export default async function Home() {
+  const disneyVideos = await getYoutubeVideos('common', 'disney trailer');
+
+  const travelVideos = await getYoutubeVideos('common', 'travel');
+
+  const productivityVideos = await getYoutubeVideos('common', 'productivity');
+
+  const popularVideos = await getYoutubeVideos('popular');
 
   return (
     <div className={styles.container}>
@@ -23,8 +26,14 @@ export default function Home() {
         />
 
         <div className={styles.sectionWrapper}>
-          <SectionCards title='Disney' videos={videos} size='large' />
-          <SectionCards title='Disney' videos={videos} size='medium' />
+          <SectionCards title='Disney' videos={disneyVideos} size='large' />
+          <SectionCards title='Travel' videos={travelVideos} size='small' />
+          <SectionCards
+            title='Productivity'
+            videos={productivityVideos}
+            size='medium'
+          />
+          <SectionCards title='Popular' videos={popularVideos} size='small' />
         </div>
       </main>
     </div>
