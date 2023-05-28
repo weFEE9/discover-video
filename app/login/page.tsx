@@ -1,14 +1,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './page.module.css';
+
+import { magicAuth } from '@/lib/magic-client';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [userMsg, setUserMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -18,17 +20,25 @@ const Login = () => {
     setEmail(email);
   };
 
-  const handleLoginWithEmail = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLoginWithEmail = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (email) {
-      // route to dashboard
-      if (email === 'teletubby332@gmail.com') {
+      try {
+        const didToken = magicAuth.auth.loginWithEmailOTP({ email });
+
         router.push('/');
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
       }
     } else {
-      // show user message
-      setUserMsg('Enter a valid email address');
+      setUserMsg('Please enter a valid email address');
+
+      setIsLoading(false);
     }
   };
 
@@ -51,7 +61,7 @@ const Login = () => {
         type='submit'
         onClick={handleLoginWithEmail}
       >
-        Sign In
+        {isLoading ? 'Loading...' : 'Sign In'}
       </button>
     </div>
   );
