@@ -17,7 +17,7 @@ export default async function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <NavBar username='weeee9@gmail.com' />
+        <NavBar />
 
         <Banner
           title={'Clifford the red dog'}
