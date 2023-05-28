@@ -7,5 +7,3 @@ const createMagicAuth = () => {
 };
 
 export const magicAuth: Magic = createMagicAuth()!;
-
-console.log('magicAuth', magicAuth);
