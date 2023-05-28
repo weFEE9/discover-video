@@ -28,7 +28,7 @@ const Login = () => {
 
     if (email) {
       try {
-        const didToken = magicAuth.auth.loginWithEmailOTP({ email });
+        const didToken = await magicAuth.auth.loginWithEmailOTP({ email });
 
         router.push('/');
       } catch (error) {
