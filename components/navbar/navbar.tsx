@@ -33,7 +33,7 @@ const NavBar = ({}: props) => {
   useEffect(() => {
     const getUsername = async () => {
       try {
-        const { email } = await magicAuth.user.getMetadata();
+        const { email } = await magicAuth.user.getInfo();
 
         if (email) {
           setUsername(email);
