@@ -1,7 +1,8 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
 import { magicAuth } from '@/lib/magic-client';
 
@@ -11,22 +12,20 @@ export default function IsLoggedIn({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('useEffect');
-
-    if (!magicAuth) return;
-
     const handleIsLoggedIn = async () => {
       const isLoggedIn = await magicAuth.user?.isLoggedIn();
-      console.log('isLoggedIn', isLoggedIn);
+      // FIXME: there would be router flicker in this approach
+      setIsLoading(false);
       if (!isLoggedIn) {
         router.push('/login');
       }
     };
 
     handleIsLoggedIn();
-  }, [magicAuth]);
+  }, []);
 
-  return <>{children}</>;
+  return isLoading ? <div>Loading...</div> : <>{children}</>;
 }
