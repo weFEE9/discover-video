@@ -1,10 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
 import { magicAuth } from '@/lib/magic-client';
+
+import Loading from '@/components/loading/loading';
 
 export default function IsLoggedIn({
   children,
@@ -27,5 +28,5 @@ export default function IsLoggedIn({
     handleIsLoggedIn();
   }, []);
 
-  return isLoading ? <div>Loading...</div> : <>{children}</>;
+  return isLoading ? <Loading /> : <>{children}</>;
 }
