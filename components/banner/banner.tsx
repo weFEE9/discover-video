@@ -1,18 +1,22 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import styles from './banner.module.css';
 
 type props = {
+  videoID: string;
   title: string;
   subTitle: string;
   imgUrl: string;
 };
 
-const Banner = ({ title, subTitle, imgUrl }: props) => {
+const Banner = ({ videoID, title, subTitle, imgUrl }: props) => {
+  const router = useRouter();
+
   const handleOnPlay = () => {
-    console.log('play');
+    router.push(`/video/${videoID}`);
   };
 
   return (
